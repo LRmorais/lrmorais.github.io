@@ -3804,9 +3804,9 @@ i.font60 {
     opacity: .1
 }
 
-.f-box i {
+/* .f-box i {
     font-size: 36px
-}
+} */
 
 .f-box.f-icon-rounded i {
     display: block;
