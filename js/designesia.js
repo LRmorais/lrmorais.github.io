@@ -86,7 +86,14 @@
             image: {
                 verticalFit: true,
                 titleSrc: function(item) {
-                    return item.el.attr('title') + ' &middot; <a class="image-source-link" href="'+item.el.attr('data-source')+'" target="_blank">Veja mais detalhes</a>';
+                    const dataSource = item.el.attr('data-source');
+                    
+                    // Condicional para exibir o link apenas se o data-source for diferente de "#"
+                    const link = dataSource !== '#' ? 
+                        ' &middot; <a class="image-source-link" href="'+dataSource+'" target="_blank">Veja mais detalhes</a>' : 
+                        '';
+                    
+                    return item.el.attr('title') + link;
                 }
             },
             gallery: {
