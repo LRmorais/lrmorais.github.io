@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Suave melhora de tipografia e transições */
+:root {
+  --radius: 1rem;
+}
+* { scroll-behavior: smooth; }
+.card { @apply rounded-2xl border border-neutral-200/70 dark:border-neutral-800/70 bg-white/60 dark:bg-neutral-950/60; }
+.chip { @apply px-3 py-1 rounded-full border text-xs; }
+.btn { @apply inline-flex items-center gap-2 px-5 py-2 rounded-xl border; }
+.btn-primary { @apply bg-brand text-white border-transparent hover:opacity-90; }
+.btn-ghost { @apply border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800; }
+.section { @apply container mx-auto px-4; max-width: 72rem; }
+.gradient {
+  @apply bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white;
+}
