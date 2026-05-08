@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { profile, experiences, skills, projects, testimonials, posts, stats } from './data'
-import { clsx } from 'clsx'
+import {
+  profile, experiences, skills, projects,
+  testimonials, posts, stats, services, valueProps, clients,
+} from './data'
 import avatar from './images/perfil.jpg'
 
 function useTheme() {
@@ -20,22 +21,31 @@ function useTheme() {
 function Nav() {
   const { setDark, dark } = useTheme()
   return (
-    <header className="sticky top-0 z-40 border-b border-neutral-200/70 dark:border-neutral-800/70 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-neutral-900/60">
+    <header className="sticky top-0 z-40 border-b border-neutral-200/70 dark:border-neutral-800/70 backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:supports-[backdrop-filter]:bg-neutral-900/80">
       <div className="section h-14 flex items-center justify-between">
-        <a href="#home" className="font-semibold tracking-tight">{profile.name}</a>
-        <nav className="hidden sm:flex items-center gap-6 text-sm">
-          <a href="#sobre" className="hover:opacity-80">Sobre</a>
-          <a href="#experiencia" className="hover:opacity-80">Experiências</a>
-          <a href="#skills" className="hover:opacity-80">Skills</a>
-          <a href="#portfolio" className="hover:opacity-80">Portfólio</a>
-          <a href="#blog" className="hover:opacity-80">Blog</a>
-          <a href="#contato" className="hover:opacity-80">Contato</a>
+        <a href="#home" className="font-bold tracking-tight">{profile.name}</a>
+        <nav className="hidden md:flex items-center gap-6 text-sm">
+          <a href="#sobre" className="hover:opacity-70 transition-opacity">Sobre</a>
+          <a href="#servicos" className="hover:opacity-70 transition-opacity">Serviços</a>
+          <a href="#portfolio" className="hover:opacity-70 transition-opacity">Portfólio</a>
+          <a href="#contato" className="hover:opacity-70 transition-opacity">Contato</a>
         </nav>
         <div className="flex items-center gap-2">
-          <button onClick={() => setDark(v => !v)} className="text-xs px-3 py-1.5 rounded-xl border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800">
-            {dark ? 'Tema: Escuro' : 'Tema: Claro'}
+          <button
+            onClick={() => setDark(v => !v)}
+            className="text-sm p-2 rounded-xl border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+            aria-label="Alternar tema"
+          >
+            {dark ? '☀️' : '🌙'}
           </button>
-          <a href={profile.github} target="_blank" className="text-xs px-3 py-1.5 rounded-xl border border-neutral-300 dark:border-neutral-700">GitHub</a>
+          <a
+            href={profile.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex btn btn-primary text-sm"
+          >
+            Contratar
+          </a>
         </div>
       </div>
     </header>
@@ -44,25 +54,50 @@ function Nav() {
 
 function Hero() {
   return (
-    <section id="home" className="section pt-16 pb-10">
+    <section id="home" className="section pt-16 pb-12">
       <div className="grid md:grid-cols-2 gap-10 items-center">
-        {/* Texto */}
         <div>
-          <h1 className="text-4xl sm:text-6xl font-bold tracking-tight leading-[1.05] max-w-2xl">{profile.name}</h1>
-          <p className="mt-2 text-xl text-neutral-700 dark:text-neutral-300">{profile.role}</p>
-          <p className="mt-4 text-neutral-700 dark:text-neutral-300 max-w-2xl">{profile.summary}</p>
-          <div className="flex flex-wrap gap-3 mt-7 text-sm">
-            <a href={profile.linkedin} target="_blank" className="btn btn-ghost">LinkedIn</a>
-            <a href={profile.whatsapp} target="_blank" className="btn btn-ghost">Whatsapp</a>
-            <a href={`mailto:${profile.email}`} className="btn btn-primary">{profile.email}</a>
+          {profile.available && (
+            <div className="badge-available mb-5">
+              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse flex-shrink-0" />
+              Disponível para novos projetos
+            </div>
+          )}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
+            Full Stack que<br />
+            <span className="text-brand">entrega</span> — web,<br />
+            mobile e APIs.
+          </h1>
+          <p className="mt-5 text-base text-neutral-600 dark:text-neutral-400 max-w-xl leading-relaxed">
+            {profile.summary}
+          </p>
+          <div className="flex flex-wrap gap-3 mt-8">
+            <a
+              href={profile.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary text-sm"
+            >
+              💬 Contratar via WhatsApp
+            </a>
+            <a href="#portfolio" className="btn btn-ghost text-sm">
+              Ver portfólio →
+            </a>
           </div>
+          <div className="flex flex-wrap gap-2 mt-6 items-center">
+            <span className="text-xs text-neutral-400 mr-1">Trabalhei com:</span>
+            {clients.map(c => (
+              <span key={c} className="chip">{c}</span>
+            ))}
+          </div>
+          {profile.education && (
+            <p className="mt-4 text-xs text-neutral-400">🎓 {profile.education}</p>
+          )}
         </div>
 
-        {/* Foto com moldura harmonizada */}
         <div className="relative flex justify-center md:justify-end">
-          {/* halo sutil */}
-          <div className="absolute inset-0 -z-10 translate-y-6 md:translate-y-8 md:translate-x-6 blur-2xl opacity-30 bg-gradient-to-br from-blue-500/40 to-fuchsia-500/40 rounded-[2rem]"></div>
-          <figure className="rounded-[2rem] overflow-hidden border border-neutral-200/70 dark:border-neutral-800/70 shadow-soft max-w-[14rem] md:max-w-[16rem]">
+          <div className="absolute inset-0 -z-10 translate-y-6 md:translate-y-8 md:translate-x-6 blur-3xl opacity-20 bg-gradient-to-br from-blue-500 to-purple-500 rounded-[2rem]" />
+          <figure className="rounded-[2rem] overflow-hidden border border-neutral-200/70 dark:border-neutral-800/70 shadow-soft max-w-[14rem] md:max-w-[18rem]">
             <img
               src={avatar}
               alt={`${profile.name} — foto de perfil`}
@@ -78,12 +113,12 @@ function Hero() {
 
 function Stats() {
   return (
-    <section className="section pb-2">
-      <div className="grid sm:grid-cols-3 gap-5">
+    <section className="section pb-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {stats.map((s, i) => (
-          <div key={i} className="card p-6 flex flex-col items-center justify-center min-h-[110px] text-center">
-            <div className="text-2xl font-bold leading-none">{s.value}</div>
-            <div className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">{s.label}</div>
+          <div key={i} className="card p-5 flex flex-col items-center text-center">
+            <div className="text-2xl sm:text-3xl font-bold text-brand leading-none">{s.value}</div>
+            <div className="mt-1.5 text-xs text-neutral-500 dark:text-neutral-400">{s.label}</div>
           </div>
         ))}
       </div>
@@ -91,26 +126,57 @@ function Stats() {
   )
 }
 
-function About() {
+function ValueProps() {
   return (
-    <section id="sobre" className="section pt-8">
-      <div className="grid lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2">
-          <h2 className="text-xl font-semibold">Sobre mim</h2>
-          <p className="mt-3 text-sm text-neutral-700 dark:text-neutral-300">
-            Comecei aos 13 com Android e Java. Hoje atuo como full stack em times multidisciplinares,
-            entregando soluções web e mobile com qualidade, observabilidade e releases contínuas.
-            Interesse especial por autenticação (Keycloak/OAuth2), performance e DX.
-          </p>
-        </div>
-        <div className="card p-5 text-sm">
-          <h3 className="font-medium">Local & Contato</h3>
-          <ul className="mt-3 space-y-2">
-            <li>{profile.location}</li>
-            <li><a className="hover:underline" href={`mailto:${profile.email}`}>{profile.email}</a></li>
-            <li><a className="hover:underline" href={profile.linkedin} target="_blank">LinkedIn</a></li>
-          </ul>
-        </div>
+    <section id="sobre" className="section pt-14 pb-4">
+      <div className="text-center mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold">Por que me contratar?</h2>
+        <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">O que você ganha ao trabalhar comigo</p>
+      </div>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {valueProps.map((vp, i) => (
+          <div key={i} className="card p-6">
+            <div className="text-3xl mb-3">{vp.icon}</div>
+            <h3 className="font-semibold text-sm">{vp.title}</h3>
+            <p className="mt-2 text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">{vp.text}</p>
+          </div>
+        ))}
+      </div>
+      <div className="flex justify-center mt-8">
+        <a href={profile.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-ghost text-sm">
+          Vamos conversar sobre seu projeto →
+        </a>
+      </div>
+    </section>
+  )
+}
+
+function Services() {
+  return (
+    <section id="servicos" className="section pt-14">
+      <div className="text-center mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold">O que posso construir para você</h2>
+        <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">Serviços para empresas e projetos freelance</p>
+      </div>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {services.map((s, i) => (
+          <div key={i} className="card p-6 flex flex-col">
+            <div className="text-3xl mb-3">{s.icon}</div>
+            <h3 className="font-semibold">{s.title}</h3>
+            <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400 flex-1 leading-relaxed">{s.description}</p>
+            <div className="flex flex-wrap gap-1.5 mt-4">
+              {s.tags.map(tag => <span key={tag} className="chip">{tag}</span>)}
+            </div>
+            <a
+              href={profile.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary text-sm mt-5 justify-center"
+            >
+              Solicitar proposta
+            </a>
+          </div>
+        ))}
       </div>
     </section>
   )
@@ -118,7 +184,7 @@ function About() {
 
 function Experience() {
   return (
-    <section id="experiencia" className="section pt-12">
+    <section id="experiencia" className="section pt-14">
       <h2 className="text-xl font-semibold">Experiências</h2>
       <ol className="relative border-s border-neutral-200 dark:border-neutral-800 mt-6 space-y-8">
         {experiences.map((exp, idx) => (
@@ -126,7 +192,7 @@ function Experience() {
             <div className="absolute w-3 h-3 rounded-full bg-brand -start-1.5 mt-1.5" />
             <time className="text-xs text-neutral-500 dark:text-neutral-400">{exp.period}</time>
             <h3 className="font-semibold mt-0.5">{exp.title}</h3>
-            <ul className="list-disc pl-5 text-sm text-neutral-700 dark:text-neutral-300 mt-1">
+            <ul className="list-disc pl-5 text-sm text-neutral-600 dark:text-neutral-400 mt-1.5 space-y-1">
               {exp.bullets.map((b, i) => <li key={i}>{b}</li>)}
             </ul>
           </li>
@@ -138,12 +204,12 @@ function Experience() {
 
 function Skills() {
   return (
-    <section id="skills" className="section pt-12">
-      <h2 className="text-xl font-semibold">Skills</h2>
-      <div className="grid md:grid-cols-2 gap-6 mt-4">
+    <section id="skills" className="section pt-14">
+      <h2 className="text-xl font-semibold">Stack técnico</h2>
+      <div className="grid md:grid-cols-2 gap-5 mt-5">
         {Object.entries(skills).map(([cat, list]) => (
           <div key={cat} className="card p-5">
-            <h3 className="font-medium mb-2">{cat}</h3>
+            <h3 className="text-sm font-medium mb-3">{cat}</h3>
             <div className="flex flex-wrap gap-2">
               {list.map(item => <span key={item} className="chip">{item}</span>)}
             </div>
@@ -154,43 +220,70 @@ function Skills() {
   )
 }
 
-function Lightbox({ src, title, onClose }: { src: string, title: string, onClose: () => void }) {
+function Lightbox({ src, title, onClose }: { src: string; title: string; onClose: () => void }) {
   useEffect(() => {
     const onEsc = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', onEsc)
     return () => window.removeEventListener('keydown', onEsc)
   }, [onClose])
   return (
-    <div className="fixed inset-0 bg-black/70 grid place-items-center p-4 z-50" onClick={onClose}>
-      <figure className="max-w-5xl w-full" onClick={e => e.stopPropagation()}>
+    <div className="fixed inset-0 bg-black/80 grid place-items-center p-4 z-50" onClick={onClose}>
+      <figure className="max-w-4xl w-full" onClick={e => e.stopPropagation()}>
         <img src={src} alt={title} className="w-full h-auto rounded-2xl" />
-        <figcaption className="mt-2 text-center text-sm text-neutral-300">{title}</figcaption>
+        <figcaption className="mt-2 text-center text-sm text-neutral-400">{title}</figcaption>
       </figure>
     </div>
   )
 }
 
 function Portfolio() {
-  const [open, setOpen] = useState<{src: string, title: string} | null>(null)
+  const [open, setOpen] = useState<{ src: string; title: string } | null>(null)
   return (
-    <section id="portfolio" className="section pt-12 pb-8">
-      <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold">Portfólio</h2>
-        <a href="#contato" className="text-sm hover:underline">Precisa de algo? Vamos falar</a>
+    <section id="portfolio" className="section pt-14 pb-8">
+      <div className="flex items-end justify-between mb-6">
+        <div>
+          <h2 className="text-2xl sm:text-3xl font-bold">Portfólio</h2>
+          <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">Projetos reais entregues para clientes</p>
+        </div>
+        <a
+          href={profile.whatsapp}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn btn-ghost text-sm hidden sm:inline-flex"
+        >
+          Precisa de algo similar? →
+        </a>
       </div>
-      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6 mt-6">
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
         {projects.map((p, idx) => (
-          <article key={idx} className="card hover:border-neutral-300 dark:hover:border-neutral-700 transition overflow-hidden">
-            <button className="w-full aspect-[4/3] overflow-hidden" onClick={() => setOpen({src: p.img, title: p.title})} title="Ampliar">
-              <img src={p.img} alt={p.title} className="w-full h-full object-cover hover:scale-[1.02] transition" />
+          <article key={idx} className="card hover:border-neutral-300 dark:hover:border-neutral-700 transition overflow-hidden group">
+            <button
+              className="w-full aspect-[4/3] overflow-hidden relative"
+              onClick={() => setOpen({ src: p.img, title: p.title })}
+              title="Ampliar"
+            >
+              <img
+                src={p.img}
+                alt={p.title}
+                className="w-full h-full object-cover group-hover:scale-[1.03] transition duration-300"
+              />
+              <span className="absolute top-3 left-3 bg-black/60 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-full">
+                {p.badge}
+              </span>
             </button>
             <div className="p-5">
-              <div className="text-sm text-brand mb-1">{p.tags.join(' • ')}</div>
+              <div className="text-xs text-brand mb-1">{p.tags.join(' · ')}</div>
               <h3 className="font-semibold leading-tight">{p.title}</h3>
               <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{p.blurb}</p>
-              <div className="mt-3 flex items-center gap-3">
-                <a href={p.href} target="_blank" className="btn btn-ghost text-sm">Abrir projeto</a>
-                <button className="btn btn-ghost text-sm" onClick={() => setOpen({src: p.img, title: p.title})}>Ampliar</button>
+              <div className="mt-4 flex items-center gap-3">
+                {p.href !== '#' && (
+                  <a href={p.href} target="_blank" rel="noopener noreferrer" className="btn btn-ghost text-xs">
+                    Ver projeto ↗
+                  </a>
+                )}
+                <button className="btn btn-ghost text-xs" onClick={() => setOpen({ src: p.img, title: p.title })}>
+                  Ampliar
+                </button>
               </div>
             </div>
           </article>
@@ -204,12 +297,20 @@ function Portfolio() {
 function Testimonials() {
   return (
     <section className="section pt-10">
-      <h2 className="text-xl font-semibold">Depoimentos</h2>
-      <div className="grid md:grid-cols-2 gap-6 mt-4">
+      <h2 className="text-xl font-semibold">O que dizem sobre meu trabalho</h2>
+      <div className="grid md:grid-cols-2 gap-6 mt-5">
         {testimonials.map((t, i) => (
-          <blockquote key={i} className="card p-5">
-            <p className="text-sm">“{t.text}”</p>
-            <div className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">— {t.name}</div>
+          <blockquote key={i} className="card p-6">
+            <div className="flex gap-0.5 mb-3">
+              {[...Array(5)].map((_, j) => (
+                <span key={j} className="text-amber-400 text-sm">★</span>
+              ))}
+            </div>
+            <p className="text-sm leading-relaxed">"{t.text}"</p>
+            <div className="mt-4">
+              <div className="text-sm font-medium">{t.name}</div>
+              <div className="text-xs text-neutral-500 dark:text-neutral-400">{t.role}</div>
+            </div>
           </blockquote>
         ))}
       </div>
@@ -219,14 +320,14 @@ function Testimonials() {
 
 function Blog() {
   return (
-    <section id="blog" className="section pt-12">
-      <h2 className="text-xl font-semibold">Artigos</h2>
-      <div className="grid md:grid-cols-2 gap-6 mt-4">
+    <section id="blog" className="section pt-14">
+      <h2 className="text-xl font-semibold">Artigos técnicos</h2>
+      <div className="grid md:grid-cols-2 gap-5 mt-5">
         {posts.map((p, i) => (
-          <a key={i} href={p.href} className="card p-5 hover:border-neutral-300 dark:hover:border-neutral-700">
-            <div className="text-xs text-neutral-500">{new Date(p.date).toLocaleDateString('pt-BR')}</div>
-            <h3 className="font-semibold leading-tight mt-1">{p.title}</h3>
-            <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{p.blurb}</p>
+          <a key={i} href={p.href} className="card p-5 hover:border-neutral-300 dark:hover:border-neutral-700 transition group">
+            <div className="text-xs text-neutral-400">{new Date(p.date).toLocaleDateString('pt-BR')}</div>
+            <h3 className="font-semibold leading-tight mt-1 group-hover:text-brand transition-colors">{p.title}</h3>
+            <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">{p.blurb}</p>
           </a>
         ))}
       </div>
@@ -236,30 +337,72 @@ function Blog() {
 
 function Contact() {
   return (
-    <section id="contato" className="section pt-12 pb-16">
-      <div className="card p-8">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-          <div>
-            <h3 className="text-xl font-semibold">Vamos construir algo juntos?</h3>
-            <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">Me chame e te respondo o quanto antes.</p>
+    <section id="contato" className="section pt-14 pb-16">
+      <div className="card p-8 sm:p-12">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold">Pronto para começar?</h2>
+          <p className="mt-3 text-neutral-500 dark:text-neutral-400 leading-relaxed">
+            Descreva seu projeto e eu te envio uma proposta em até 24 horas.
+            Trabalho remotamente com clientes em todo o Brasil.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
+            <a
+              href={profile.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary w-full sm:w-auto justify-center"
+            >
+              💬 Falar no WhatsApp
+            </a>
+            <a
+              href={`mailto:${profile.email}`}
+              className="btn btn-ghost w-full sm:w-auto justify-center"
+            >
+              ✉️ Enviar e-mail
+            </a>
+            <a
+              href={profile.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-ghost w-full sm:w-auto justify-center"
+            >
+              LinkedIn
+            </a>
           </div>
-          <div className="flex flex-wrap gap-3 text-sm">
-            <a href={`mailto:${profile.email}`} className="btn btn-primary">{profile.email}</a>
-            <a href={profile.linkedin} target="_blank" className="btn btn-ghost">LinkedIn</a>
-            <a href={profile.github} target="_blank" className="btn btn-ghost">GitHub</a>
-          </div>
+          <p className="mt-6 text-xs text-neutral-400">
+            ⏱ Resposta geralmente em menos de 24 horas · 📍 {profile.location} · trabalho remoto
+          </p>
         </div>
       </div>
     </section>
   )
 }
 
+function FloatingCTA() {
+  return (
+    <a
+      href={profile.whatsapp}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-2xl shadow-lg transition-all hover:scale-105 text-sm font-medium"
+      aria-label="Falar no WhatsApp"
+    >
+      <span>💬</span>
+      <span className="hidden sm:inline">WhatsApp</span>
+    </a>
+  )
+}
+
 function Footer() {
   return (
     <footer className="border-t border-neutral-200 dark:border-neutral-800">
-      <div className="section py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
-        <p>© {new Date().getFullYear()} {profile.name}. Todos os direitos reservados.</p>
-        <a href="#home" className="btn btn-ghost">Voltar ao topo</a>
+      <div className="section py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-neutral-500">
+        <p>© {new Date().getFullYear()} {profile.name} — Florianópolis, SC</p>
+        <div className="flex items-center gap-4">
+          <a href={profile.github} target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">GitHub</a>
+          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">LinkedIn</a>
+          <a href="#home" className="hover:opacity-70 transition-opacity">↑ Topo</a>
+        </div>
       </div>
     </footer>
   )
@@ -269,16 +412,20 @@ export default function App() {
   return (
     <>
       <Nav />
-      <Hero />
-      <Stats />
-      <About />
-      <Experience />
-      <Skills />
-      <Portfolio />
-      <Testimonials />
-      <Blog />
-      <Contact />
+      <main>
+        <Hero />
+        <Stats />
+        <ValueProps />
+        <Services />
+        <Experience />
+        <Skills />
+        <Portfolio />
+        <Testimonials />
+        <Blog />
+        <Contact />
+      </main>
       <Footer />
+      <FloatingCTA />
     </>
   )
 }

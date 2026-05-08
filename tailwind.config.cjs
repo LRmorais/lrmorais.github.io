@@ -5,9 +5,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: { DEFAULT: '#3b82f6' } // ajuste sua cor de marca aqui
-      }
-    }
+        brand: { DEFAULT: '#3b82f6' },
+      },
+      boxShadow: {
+        soft: '0 2px 16px rgba(0,0,0,0.06), 0 0 1px rgba(0,0,0,0.03)',
+      },
+    },
   },
-  plugins: []
+  plugins: [],
 }
