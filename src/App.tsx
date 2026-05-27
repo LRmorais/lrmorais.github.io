@@ -220,27 +220,14 @@ function Skills() {
   )
 }
 
-function Lightbox({ src, title, onClose }: { src: string; title: string; onClose: () => void }) {
-  useEffect(() => {
-    const onEsc = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
-    window.addEventListener('keydown', onEsc)
-    return () => window.removeEventListener('keydown', onEsc)
-  }, [onClose])
-  return (
-    <div className="fixed inset-0 bg-black/80 grid place-items-center p-4 z-50" onClick={onClose}>
-      <figure className="max-w-4xl w-full" onClick={e => e.stopPropagation()}>
-        <img src={src} alt={title} className="w-full h-auto rounded-2xl" />
-        <figcaption className="mt-2 text-center text-sm text-neutral-400">{title}</figcaption>
-      </figure>
-    </div>
-  )
-}
-
 function Portfolio() {
-  const [open, setOpen] = useState<{ src: string; title: string } | null>(null)
+  const [filter, setFilter] = useState('Todos')
+  const categories = ['Todos', ...Array.from(new Set(projects.map(p => p.category)))]
+  const filtered = filter === 'Todos' ? projects : projects.filter(p => p.category === filter)
+
   return (
     <section id="portfolio" className="section pt-14 pb-8">
-      <div className="flex items-end justify-between mb-6">
+      <div className="flex items-end justify-between mb-4">
         <div>
           <h2 className="text-2xl sm:text-3xl font-bold">Portfólio</h2>
           <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">Projetos reais entregues para clientes</p>
@@ -254,42 +241,54 @@ function Portfolio() {
           Precisa de algo similar? →
         </a>
       </div>
+      <div className="flex flex-wrap gap-2 mb-6">
+        {categories.map(cat => (
+          <button
+            key={cat}
+            onClick={() => setFilter(cat)}
+            className={`px-4 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+              filter === cat
+                ? 'bg-brand text-white border-transparent'
+                : 'border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800'
+            }`}
+          >
+            {cat}
+            {cat !== 'Todos' && (
+              <span className="ml-1.5 opacity-60">
+                {projects.filter(p => p.category === cat).length}
+              </span>
+            )}
+          </button>
+        ))}
+      </div>
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {projects.map((p, idx) => (
+        {filtered.map((p, idx) => (
           <article key={idx} className="card hover:border-neutral-300 dark:hover:border-neutral-700 transition overflow-hidden group">
-            <button
-              className="w-full aspect-[4/3] overflow-hidden relative"
-              onClick={() => setOpen({ src: p.img, title: p.title })}
-              title="Ampliar"
-            >
+            <div className="w-full aspect-[4/3] overflow-hidden relative">
               <img
                 src={p.img}
                 alt={p.title}
-                className="w-full h-full object-cover group-hover:scale-[1.03] transition duration-300"
+                className="w-full h-full object-contain p-6 group-hover:scale-[1.03] transition duration-300"
               />
               <span className="absolute top-3 left-3 bg-black/60 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-full">
                 {p.badge}
               </span>
-            </button>
+            </div>
             <div className="p-5">
               <div className="text-xs text-brand mb-1">{p.tags.join(' · ')}</div>
               <h3 className="font-semibold leading-tight">{p.title}</h3>
               <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{p.blurb}</p>
-              <div className="mt-4 flex items-center gap-3">
-                {p.href !== '#' && (
+              {p.href !== '#' && (
+                <div className="mt-4">
                   <a href={p.href} target="_blank" rel="noopener noreferrer" className="btn btn-ghost text-xs">
                     Ver projeto ↗
                   </a>
-                )}
-                <button className="btn btn-ghost text-xs" onClick={() => setOpen({ src: p.img, title: p.title })}>
-                  Ampliar
-                </button>
-              </div>
+                </div>
+              )}
             </div>
           </article>
         ))}
       </div>
-      {open && <Lightbox src={open.src} title={open.title} onClose={() => setOpen(null)} />}
     </section>
   )
 }
