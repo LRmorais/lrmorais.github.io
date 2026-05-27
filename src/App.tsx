@@ -410,7 +410,7 @@ function Footer() {
 
 export default function App() {
   return (
-    <>
+    <div className="min-h-screen bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100">
       <Nav />
       <main>
         <Hero />
@@ -426,6 +426,6 @@ export default function App() {
       </main>
       <Footer />
       <FloatingCTA />
-    </>
+    </div>
   )
 }
