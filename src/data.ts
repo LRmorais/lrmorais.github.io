@@ -8,7 +8,7 @@ export const profile = {
   location: 'Florianópolis, SC — Brasil',
   available: true,
   summary:
-    'Construo produtos web e mobile completos — do frontend ao backend e deploy em nuvem — com 6+ anos entregando para empresas como Previ, Gazeta do Povo e órgãos do governo federal.',
+    'Você me conta o que precisa, eu construo e entrego funcionando. Site para empresa, app para celular ou sistema completo — sem você precisar entender de tecnologia. 6+ anos, 21 projetos entregues, proposta em até 24h.',
   education: 'Bacharelando em Eng. da Computação · UFPA (2020–2026)',
 }
 
@@ -24,54 +24,72 @@ export const stats = [
 export const valueProps = [
   {
     icon: '⚡',
-    title: 'Entrega full stack',
-    text: 'Frontend, backend e deploy num só contrato. Sem depender de outro dev para fechar o produto.',
+    title: 'Tudo num só lugar',
+    text: 'Site, app e sistema integrado no mesmo contrato. Você não precisa gerenciar vários fornecedores para ter o produto funcionando.',
   },
   {
     icon: '✅',
-    title: 'Qualidade garantida',
-    text: 'Testes automatizados, CI/CD desde o primeiro sprint e code review rigoroso em cada PR.',
+    title: 'Sem surpresas no preço nem no prazo',
+    text: 'Você recebe um escopo claro antes de começar. Se aparecer algo diferente no meio do caminho, eu te aviso antes de mudar qualquer coisa.',
   },
   {
     icon: '💬',
-    title: 'Comunicação direta',
-    text: 'Updates frequentes, sem enrolação. Você acompanha o progresso em tempo real.',
+    title: 'Você sempre sabe o que está acontecendo',
+    text: 'Atualização toda semana e uma demonstração ao vivo no final de cada etapa. Seu projeto nunca vira uma caixa preta.',
   },
   {
-    icon: '📅',
-    title: 'Prazo respeitado',
-    text: 'Entregas incrementais toda semana. Problemas são identificados cedo, nunca na véspera.',
+    icon: '🤝',
+    title: 'Já entregou para quem exige qualidade',
+    text: 'Mais de 21 sistemas rodando para clientes como Previ e Gazeta do Povo. O mesmo cuidado vai para o seu projeto.',
+  },
+]
+
+export const howItWorks = [
+  {
+    step: '01',
+    title: 'Me conta seu projeto',
+    text: 'Manda uma mensagem descrevendo o que você precisa. Sem formulário longo, sem reunião obrigatória.',
+  },
+  {
+    step: '02',
+    title: 'Proposta em até 24h',
+    text: 'Você recebe escopo, prazo e investimento por escrito — sem surpresas no meio do caminho.',
+  },
+  {
+    step: '03',
+    title: 'Entrega incremental',
+    text: 'Sprints semanais com demos reais. Você acompanha o progresso e aprova cada etapa.',
   },
 ]
 
 export const services = [
   {
     icon: '🌐',
-    title: 'Aplicação Web',
+    title: 'Site ou sistema web',
     description:
-      'Sistema completo com interface React/Angular, API robusta e banco de dados. Autenticação, deploy em nuvem e documentação inclusos.',
+      'Do site institucional ao sistema com login, cadastros e painel de controle. Você recebe tudo pronto para usar — sem precisar entender de tecnologia.',
     tags: ['React', 'Angular', 'Node.js', 'Spring Boot'],
   },
   {
     icon: '📱',
-    title: 'App Mobile',
+    title: 'App para iOS e Android',
     description:
-      'App iOS e Android em um único código com React Native. Da primeira tela à publicação nas lojas com CI/CD automatizado.',
+      'Leve seu negócio para o celular dos seus clientes. Um único desenvolvimento, publicado nas duas lojas com atualizações automáticas.',
     tags: ['React Native', 'iOS', 'Android', 'Expo'],
   },
   {
     icon: '🔌',
-    title: 'API & Integrações',
+    title: 'Integrações e automações',
     description:
-      'API REST com autenticação segura (JWT/OAuth2), integração com serviços externos, documentação e cobertura de testes.',
-    tags: ['Node.js', 'Spring Boot', 'Quarkus', 'AWS Lambda'],
+      'Conecte seu negócio a sistemas de pagamento, marketplaces, ERPs ou qualquer serviço externo. Automatize o que é feito na mão hoje.',
+    tags: ['Pagamentos', 'Integrações', 'Automação', 'AWS'],
   },
   {
     icon: '🏗️',
-    title: 'Consultoria Técnica',
+    title: 'Consultoria técnica',
     description:
-      'Revisão de arquitetura, code review, setup de CI/CD e definição de padrões técnicos para o seu time crescer com qualidade.',
-    tags: ['Arquitetura', 'Code Review', 'CI/CD', 'DevOps'],
+      'Tem um time de devs mas precisa de direção? Reviso arquitetura, oriento o time e defino os padrões para o projeto crescer sem virar bagunça.',
+    tags: ['Arquitetura', 'Code Review', 'Mentoria', 'DevOps'],
   },
 ]
 
@@ -319,6 +337,33 @@ export const projects = [
     blurb: 'Sistema de monitoramento de temperatura para vacinas — patente concedida pelo INPI e artigo publicado no IEEE INDUSCON 2021.',
     badge: 'Patente INPI',
     category: 'Pesquisa',
+  },
+]
+
+export const faq = [
+  {
+    q: 'Preciso entender de tecnologia para trabalhar com você?',
+    a: 'Não. Você me conta o que seu negócio precisa e eu cuido do resto. A comunicação é sempre em português claro — sem siglas, sem jargão técnico.',
+  },
+  {
+    q: 'Quanto tempo leva para ficar pronto?',
+    a: 'Depende do projeto. Um site institucional fica pronto em 2–3 semanas. Um app completo leva em média 2–4 meses. Depois de conversar sobre o que você precisa, te passo um prazo real e por escrito.',
+  },
+  {
+    q: 'Quanto custa?',
+    a: 'Cada projeto tem escopo diferente — não existe tabela única. Me conta o que você precisa pelo WhatsApp e te envio uma proposta detalhada em até 24 horas, sem compromisso.',
+  },
+  {
+    q: 'Você atende pequenas empresas e autônomos?',
+    a: 'Sim. Já desenvolvi desde sites simples para profissionais liberais até sistemas para grandes empresas. O tamanho do cliente não muda o cuidado com a entrega.',
+  },
+  {
+    q: 'E se eu precisar de mudanças depois da entrega?',
+    a: 'Todo projeto inclui um período de ajustes após a entrega. Para evoluções maiores, combinamos um contrato de manutenção ou tratamos como novo projeto — você escolhe.',
+  },
+  {
+    q: 'Você trabalha com clientes fora de Florianópolis?',
+    a: 'Sim, 100% remoto. Atendo clientes em todo o Brasil. Todo o acompanhamento é feito por videochamada, WhatsApp ou e-mail — onde for mais cômodo para você.',
   },
 ]
 

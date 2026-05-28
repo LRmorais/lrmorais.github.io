@@ -2,23 +2,101 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.jsdelivr.net/gh/twitter/twemoji/assets/72x72/1f680.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Lucas Morais — Desenvolvedor Full Stack</title>
-    <meta name="description" content="Portfólio de Lucas Morais — Desenvolvedor Full Stack (Angular, React, React Native, Java/Spring, Node).">
-    <meta property="og:title" content="Lucas Morais — Desenvolvedor Full Stack" />
-    <meta property="og:description" content="Web & Mobile com foco em qualidade, CI/CD e Cloud (AWS/OpenShift)." />
+
+    <!-- Primary SEO -->
+    <title>Lucas Morais — Desenvolvedor Full Stack | Web, Mobile e APIs · Florianópolis</title>
+    <meta name="description" content="Precisa de um sistema web, app mobile ou API? Lucas Morais entrega soluções completas (Angular, React Native, Java, Node.js) com 6+ anos de experiência e 21 projetos em produção. Proposta em até 24h." />
+    <meta name="keywords" content="desenvolvedor full stack freelance, React Native, Angular, Java Spring Boot, Node.js, API REST, app mobile iOS Android, sistema web, Florianópolis, Santa Catarina" />
+    <meta name="author" content="Lucas Morais" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://lrmorais.github.io/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content="Lucas Morais — Desenvolvedor Full Stack | Web, Mobile e APIs" />
+    <meta property="og:description" content="21 projetos entregues para Previ, Gazeta do Povo e órgãos de governo. Web, mobile e APIs — proposta em até 24h." />
     <meta property="og:image" content="https://lrmorais.github.io/og-cover.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:url" content="https://lrmorais.github.io/" />
+    <meta property="og:site_name" content="Lucas Morais · Full Stack" />
+
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="manifest" href="/manifest.webmanifest">
-    <meta name="theme-color" content="#0f172a" />
+    <meta name="twitter:title" content="Lucas Morais — Desenvolvedor Full Stack" />
+    <meta name="twitter:description" content="21 projetos em produção. Web, mobile e APIs. Proposta em até 24h." />
+    <meta name="twitter:image" content="https://lrmorais.github.io/og-cover.png" />
+
+    <!-- Icons & PWA -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#6366f1" />
     <link rel="apple-touch-icon" sizes="180x180" href="/icon-192.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/icon-16.png" />
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+
+    <!-- Anti-flash dark mode -->
+    <script>
+      (function(){
+        var t=localStorage.getItem('theme');
+        var p=window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if(t==='dark'||(t===null&&p)){document.documentElement.classList.add('dark')}
+      })()
+    </script>
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://lrmorais.github.io/#person",
+          "name": "Lucas Morais",
+          "jobTitle": "Desenvolvedor Full Stack",
+          "url": "https://lrmorais.github.io/",
+          "email": "lucas.morais23ti@gmail.com",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Florianópolis",
+            "addressRegion": "SC",
+            "addressCountry": "BR"
+          },
+          "sameAs": [
+            "https://github.com/LRmorais",
+            "https://www.linkedin.com/in/lrmorais/"
+          ],
+          "knowsAbout": ["Angular", "React", "React Native", "Java", "Spring Boot", "Quarkus", "Node.js", "TypeScript", "AWS", "Docker", "Kafka"],
+          "hasOccupation": {
+            "@type": "Occupation",
+            "name": "Desenvolvedor Full Stack",
+            "occupationLocation": { "@type": "Country", "name": "Brazil" }
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://lrmorais.github.io/#website",
+          "url": "https://lrmorais.github.io/",
+          "name": "Lucas Morais · Desenvolvedor Full Stack",
+          "description": "Portfólio e contato de Lucas Morais — desenvolvedor full stack freelance em Florianópolis.",
+          "author": { "@id": "https://lrmorais.github.io/#person" }
+        },
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://lrmorais.github.io/#service",
+          "name": "Lucas Morais · Desenvolvimento de Software",
+          "description": "Desenvolvimento web, mobile e APIs para empresas e startups. 21 projetos entregues em produção.",
+          "provider": { "@id": "https://lrmorais.github.io/#person" },
+          "areaServed": "BR",
+          "serviceType": ["Desenvolvimento Web", "App Mobile", "API REST", "Consultoria Técnica"]
+        }
+      ]
+    }
+    </script>
   </head>
-  <body class="bg-white text-neutral-900 dark:bg-black dark:text-neutral-100">
+  <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import {
   profile, experiences, skills, projects,
-  testimonials, posts, stats, services, valueProps, clients,
+  testimonials, posts, stats, services, valueProps, howItWorks, faq, clients,
 } from './data'
 import avatar from './images/perfil.jpg'
 
@@ -18,17 +18,27 @@ function useTheme() {
   return { dark, setDark }
 }
 
+const NAV_LINKS = [
+  { href: '#sobre', label: 'Sobre' },
+  { href: '#servicos', label: 'Serviços' },
+  { href: '#portfolio', label: 'Portfólio' },
+  { href: '#faq', label: 'FAQ' },
+  { href: '#contato', label: 'Contato' },
+]
+
 function Nav() {
   const { setDark, dark } = useTheme()
+  const [menuOpen, setMenuOpen] = useState(false)
   return (
     <header className="sticky top-0 z-40 border-b border-neutral-200/70 dark:border-neutral-800/70 backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:supports-[backdrop-filter]:bg-neutral-900/80">
       <div className="section h-14 flex items-center justify-between">
-        <a href="#home" className="font-bold tracking-tight">{profile.name}</a>
+        <a href="#home" className="font-bold tracking-tight" onClick={() => setMenuOpen(false)}>
+          {profile.name}
+        </a>
         <nav className="hidden md:flex items-center gap-6 text-sm">
-          <a href="#sobre" className="hover:opacity-70 transition-opacity">Sobre</a>
-          <a href="#servicos" className="hover:opacity-70 transition-opacity">Serviços</a>
-          <a href="#portfolio" className="hover:opacity-70 transition-opacity">Portfólio</a>
-          <a href="#contato" className="hover:opacity-70 transition-opacity">Contato</a>
+          {NAV_LINKS.map(l => (
+            <a key={l.href} href={l.href} className="hover:opacity-70 transition-opacity">{l.label}</a>
+          ))}
         </nav>
         <div className="flex items-center gap-2">
           <button
@@ -46,8 +56,40 @@ function Nav() {
           >
             Contratar
           </a>
+          <button
+            onClick={() => setMenuOpen(v => !v)}
+            className="md:hidden p-2 rounded-xl border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-base leading-none"
+            aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
+          >
+            {menuOpen ? '✕' : '☰'}
+          </button>
         </div>
       </div>
+      {menuOpen && (
+        <div className="md:hidden border-t border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-neutral-950/95 backdrop-blur">
+          <nav className="section py-3 flex flex-col gap-0.5">
+            {NAV_LINKS.map(l => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setMenuOpen(false)}
+                className="py-3 px-3 rounded-xl text-sm font-medium hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+              >
+                {l.label}
+              </a>
+            ))}
+            <a
+              href={profile.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMenuOpen(false)}
+              className="mt-2 btn btn-primary text-sm justify-center"
+            >
+              💬 Contratar via WhatsApp
+            </a>
+          </nav>
+        </div>
+      )}
     </header>
   )
 }
@@ -130,8 +172,8 @@ function ValueProps() {
   return (
     <section id="sobre" className="section pt-14 pb-4">
       <div className="text-center mb-8">
-        <h2 className="text-2xl sm:text-3xl font-bold">Por que me contratar?</h2>
-        <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">O que você ganha ao trabalhar comigo</p>
+        <h2 className="text-2xl sm:text-3xl font-bold">O que você ganha contratando comigo</h2>
+        <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">Benefícios concretos para o seu projeto</p>
       </div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {valueProps.map((vp, i) => (
@@ -182,10 +224,35 @@ function Services() {
   )
 }
 
+function HowItWorks() {
+  return (
+    <section className="section pt-14">
+      <div className="text-center mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold">Como funciona</h2>
+        <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">Do primeiro contato até o produto no ar</p>
+      </div>
+      <div className="grid sm:grid-cols-3 gap-6">
+        {howItWorks.map((step, i) => (
+          <div key={i} className="card p-6 relative">
+            <div className="text-5xl font-black text-brand/15 leading-none mb-3 select-none">{step.step}</div>
+            <h3 className="font-semibold">{step.title}</h3>
+            <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">{step.text}</p>
+          </div>
+        ))}
+      </div>
+      <div className="flex justify-center mt-8">
+        <a href={profile.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-primary text-sm">
+          💬 Começar agora
+        </a>
+      </div>
+    </section>
+  )
+}
+
 function Experience() {
   return (
     <section id="experiencia" className="section pt-14">
-      <h2 className="text-xl font-semibold">Experiências</h2>
+      <h2 className="text-2xl font-bold">Experiências</h2>
       <ol className="relative border-s border-neutral-200 dark:border-neutral-800 mt-6 space-y-8">
         {experiences.map((exp, idx) => (
           <li key={idx} className="ms-4 relative">
@@ -205,7 +272,7 @@ function Experience() {
 function Skills() {
   return (
     <section id="skills" className="section pt-14">
-      <h2 className="text-xl font-semibold">Stack técnico</h2>
+      <h2 className="text-2xl font-bold">Tecnologias</h2>
       <div className="grid md:grid-cols-2 gap-5 mt-5">
         {Object.entries(skills).map(([cat, list]) => (
           <div key={cat} className="card p-5">
@@ -296,7 +363,7 @@ function Portfolio() {
 function Testimonials() {
   return (
     <section className="section pt-10">
-      <h2 className="text-xl font-semibold">O que dizem sobre meu trabalho</h2>
+      <h2 className="text-2xl font-bold">O que dizem sobre meu trabalho</h2>
       <div className="grid md:grid-cols-2 gap-6 mt-5">
         {testimonials.map((t, i) => (
           <blockquote key={i} className="card p-6">
@@ -334,15 +401,52 @@ function Blog() {
   )
 }
 
+function FAQ() {
+  const [open, setOpen] = useState<number | null>(null)
+  return (
+    <section id="faq" className="section pt-14">
+      <div className="text-center mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold">Perguntas frequentes</h2>
+        <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">Dúvidas comuns de quem está pensando em contratar</p>
+      </div>
+      <div className="max-w-2xl mx-auto space-y-3">
+        {faq.map((item, i) => (
+          <div key={i} className="card overflow-hidden">
+            <button
+              onClick={() => setOpen(open === i ? null : i)}
+              className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 font-medium text-sm hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors"
+            >
+              <span>{item.q}</span>
+              <span className={`shrink-0 text-brand text-lg leading-none transition-transform duration-200 ${open === i ? 'rotate-45' : ''}`}>+</span>
+            </button>
+            <div className={`grid transition-all duration-200 ease-in-out ${open === i ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+              <div className="overflow-hidden">
+                <div className="px-5 pb-5 pt-3 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed border-t border-neutral-100 dark:border-neutral-800">
+                  {item.a}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="flex justify-center mt-8">
+        <a href={profile.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-ghost text-sm">
+          Tem outra dúvida? Me manda uma mensagem →
+        </a>
+      </div>
+    </section>
+  )
+}
+
 function Contact() {
   return (
-    <section id="contato" className="section pt-14 pb-16">
+    <section id="contato" className="section pt-14 pb-24 sm:pb-16">
       <div className="card p-8 sm:p-12">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold">Pronto para começar?</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold">Vamos construir algo juntos?</h2>
           <p className="mt-3 text-neutral-500 dark:text-neutral-400 leading-relaxed">
-            Descreva seu projeto e eu te envio uma proposta em até 24 horas.
-            Trabalho remotamente com clientes em todo o Brasil.
+            Descreva seu projeto e receba uma proposta clara em até 24 horas.
+            Mais de 21 projetos entregues para clientes em todo o Brasil — do app mobile ao sistema governamental.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
             <a
@@ -398,7 +502,7 @@ function Footer() {
       <div className="section py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-neutral-500">
         <p>© {new Date().getFullYear()} {profile.name} — Florianópolis, SC</p>
         <div className="flex items-center gap-4">
-          <a href={profile.github} target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">GitHub</a>
+          <a href={profile.whatsapp} target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">WhatsApp</a>
           <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">LinkedIn</a>
           <a href="#home" className="hover:opacity-70 transition-opacity">↑ Topo</a>
         </div>
@@ -416,11 +520,12 @@ export default function App() {
         <Stats />
         <ValueProps />
         <Services />
+        <HowItWorks />
+        <Portfolio />
         <Experience />
         <Skills />
-        <Portfolio />
-        <Testimonials />
-        <Blog />
+        {posts.some(p => p.href !== '#') && <Blog />}
+        <FAQ />
         <Contact />
       </main>
       <Footer />
