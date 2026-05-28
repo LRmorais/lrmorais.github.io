@@ -3,6 +3,7 @@ import {
   profile, experiences, skills, projects,
   testimonials, posts, stats, services, valueProps, howItWorks, faq, clients,
 } from './data'
+import { Logo } from './Logo'
 import avatar from './images/perfil.jpg'
 
 function useTheme() {
@@ -32,8 +33,8 @@ function Nav() {
   return (
     <header className="sticky top-0 z-40 border-b border-neutral-200/70 dark:border-neutral-800/70 backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:supports-[backdrop-filter]:bg-neutral-900/80">
       <div className="section h-14 flex items-center justify-between">
-        <a href="#home" className="font-bold tracking-tight" onClick={() => setMenuOpen(false)}>
-          {profile.name}
+        <a href="#home" onClick={() => setMenuOpen(false)} aria-label="Lucas Morais — início">
+          <Logo size={32} />
         </a>
         <nav className="hidden md:flex items-center gap-6 text-sm">
           {NAV_LINKS.map(l => (
@@ -94,7 +95,32 @@ function Nav() {
   )
 }
 
+const ROTATING_WORDS = [
+  'um site profissional',
+  'um app próprio',
+  'um sistema sob medida',
+  'mais clientes online',
+]
+
 function Hero() {
+  const [wordIdx, setWordIdx] = useState(0)
+  const [visible, setVisible] = useState(true)
+
+  useEffect(() => {
+    const id = setInterval(() => setVisible(false), 2800)
+    return () => clearInterval(id)
+  }, [])
+
+  useEffect(() => {
+    if (!visible) {
+      const id = setTimeout(() => {
+        setWordIdx(i => (i + 1) % ROTATING_WORDS.length)
+        setVisible(true)
+      }, 300)
+      return () => clearTimeout(id)
+    }
+  }, [visible])
+
   return (
     <section id="home" className="section pt-16 pb-12">
       <div className="grid md:grid-cols-2 gap-10 items-center">
@@ -106,9 +132,16 @@ function Hero() {
             </div>
           )}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
-            Full Stack que<br />
-            <span className="text-brand">entrega</span> — web,<br />
-            mobile e APIs.
+            Seu negócio<br />
+            precisa de<br />
+            <span className="block min-h-[1.15em]">
+              <span
+                className="text-brand transition-opacity duration-300"
+                style={{ opacity: visible ? 1 : 0 }}
+              >
+                {ROTATING_WORDS[wordIdx]}
+              </span>
+            </span>
           </h1>
           <p className="mt-5 text-base text-neutral-600 dark:text-neutral-400 max-w-xl leading-relaxed">
             {profile.summary}
@@ -499,9 +532,12 @@ function FloatingCTA() {
 function Footer() {
   return (
     <footer className="border-t border-neutral-200 dark:border-neutral-800">
-      <div className="section py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-neutral-500">
-        <p>© {new Date().getFullYear()} {profile.name} — Florianópolis, SC</p>
-        <div className="flex items-center gap-4">
+      <div className="section py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex flex-col items-center sm:items-start gap-1">
+          <Logo size={28} showTagline />
+          <p className="text-xs text-neutral-400">© {new Date().getFullYear()} · Florianópolis, SC</p>
+        </div>
+        <div className="flex items-center gap-4 text-sm text-neutral-500">
           <a href={profile.whatsapp} target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">WhatsApp</a>
           <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">LinkedIn</a>
           <a href="#home" className="hover:opacity-70 transition-opacity">↑ Topo</a>
