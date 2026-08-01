@@ -1,6 +1,7 @@
 export const profile = {
+  company: 'Morais Soluções Digitais',
   name: 'Lucas Morais',
-  role: 'Desenvolvedor Full Stack',
+  role: 'Fundador & Desenvolvedor Full Stack',
   email: 'lucas.morais23ti@gmail.com',
   github: 'https://github.com/LRmorais',
   linkedin: 'https://www.linkedin.com/in/lrmorais/',
@@ -8,7 +9,7 @@ export const profile = {
   location: 'Florianópolis, SC — Brasil',
   available: true,
   summary:
-    'Você me conta o que precisa, eu construo e entrego funcionando. Site para empresa, app para celular ou sistema completo — sem você precisar entender de tecnologia. 6+ anos, 21 projetos entregues, proposta em até 24h.',
+    'Sites, aplicativos, APIs de integração e manutenção de sistemas — tudo com quem programa falando direto com você, sem intermediário no meio do caminho. 6+ anos de experiência, 21 projetos entregues, proposta em até 24h.',
   education: 'Bacharelando em Eng. da Computação · UFPA (2020–2026)',
 }
 
@@ -23,22 +24,22 @@ export const stats = [
 
 export const valueProps = [
   {
-    icon: '⚡',
+    icon: 'Lightning',
     title: 'Tudo num só lugar',
-    text: 'Site, app e sistema integrado no mesmo contrato. Você não precisa gerenciar vários fornecedores para ter o produto funcionando.',
+    text: 'Site, app, API e manutenção no mesmo contrato. Você não precisa gerenciar vários fornecedores para ter o produto funcionando.',
   },
   {
-    icon: '✅',
+    icon: 'CheckCircle',
     title: 'Sem surpresas no preço nem no prazo',
     text: 'Você recebe um escopo claro antes de começar. Se aparecer algo diferente no meio do caminho, eu te aviso antes de mudar qualquer coisa.',
   },
   {
-    icon: '💬',
+    icon: 'ChatCircleDots',
     title: 'Você sempre sabe o que está acontecendo',
     text: 'Atualização toda semana e uma demonstração ao vivo no final de cada etapa. Seu projeto nunca vira uma caixa preta.',
   },
   {
-    icon: '🤝',
+    icon: 'Handshake',
     title: 'Já entregou para quem exige qualidade',
     text: 'Mais de 21 sistemas rodando para clientes como Previ e Gazeta do Povo. O mesmo cuidado vai para o seu projeto.',
   },
@@ -64,32 +65,32 @@ export const howItWorks = [
 
 export const services = [
   {
-    icon: '🌐',
-    title: 'Site ou sistema web',
+    icon: 'Globe',
+    title: 'Criação de sites',
     description:
-      'Do site institucional ao sistema com login, cadastros e painel de controle. Você recebe tudo pronto para usar — sem precisar entender de tecnologia.',
+      'Do site institucional à landing page de vendas, com o sistema com login, cadastros e painel por trás quando o projeto precisar. Pronto para usar, sem você precisar entender de tecnologia.',
     tags: ['React', 'Angular', 'Node.js', 'Spring Boot'],
   },
   {
-    icon: '📱',
-    title: 'App para iOS e Android',
+    icon: 'DeviceMobile',
+    title: 'Aplicativos',
     description:
-      'Leve seu negócio para o celular dos seus clientes. Um único desenvolvimento, publicado nas duas lojas com atualizações automáticas.',
+      'Leve seu negócio para o celular dos seus clientes. Um único desenvolvimento, publicado nas duas lojas (iOS e Android) com atualizações automáticas.',
     tags: ['React Native', 'iOS', 'Android', 'Expo'],
   },
   {
-    icon: '🔌',
-    title: 'Integrações e automações',
+    icon: 'Plugs',
+    title: 'APIs de integração',
     description:
-      'Conecte seu negócio a sistemas de pagamento, marketplaces, ERPs ou qualquer serviço externo. Automatize o que é feito na mão hoje.',
+      'Conecte seu negócio a sistemas de pagamento, marketplaces, ERPs ou qualquer serviço externo. Automatize o que hoje ainda é feito na mão.',
     tags: ['Pagamentos', 'Integrações', 'Automação', 'AWS'],
   },
   {
-    icon: '🏗️',
-    title: 'Consultoria técnica',
+    icon: 'Wrench',
+    title: 'Manutenção e evolução de sistemas',
     description:
-      'Tem um time de devs mas precisa de direção? Reviso arquitetura, oriento o time e defino os padrões para o projeto crescer sem virar bagunça.',
-    tags: ['Arquitetura', 'Code Review', 'Mentoria', 'DevOps'],
+      'Já tem um site, app ou sistema rodando? Cuido da manutenção, corrijo bugs e evoluo o produto com novas funcionalidades sem parar o que já funciona.',
+    tags: ['Legado', 'Correção de bugs', 'Novas features', 'Performance'],
   },
 ]
 
@@ -341,6 +342,10 @@ export const projects = [
 ]
 
 export const faq = [
+  {
+    q: 'A Morais Soluções Digitais é uma agência grande ou é você mesmo quem desenvolve?',
+    a: 'É um estúdio boutique liderado por mim, Lucas Morais. Isso significa que você fala direto com quem vai programar o seu projeto — sem gerente de contas no meio, sem telefone sem fio. Quando o projeto pede mais mãos, monto um time sob medida para a demanda.',
+  },
   {
     q: 'Preciso entender de tecnologia para trabalhar com você?',
     a: 'Não. Você me conta o que seu negócio precisa e eu cuido do resto. A comunicação é sempre em português claro — sem siglas, sem jargão técnico.',
