@@ -21,18 +21,18 @@ export function Logo({ height = 28, compact = false, showTagline = false }: Logo
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col items-start">
       <img
         src={logoLight}
         alt="Morais Soluções Digitais"
-        style={{ height }}
-        className="w-auto block dark:hidden"
+        style={{ height, width: 'auto' }}
+        className="block dark:hidden max-w-none"
       />
       <img
         src={logoDark}
         alt="Morais Soluções Digitais"
-        style={{ height }}
-        className="w-auto hidden dark:block"
+        style={{ height, width: 'auto' }}
+        className="hidden dark:block max-w-none"
       />
       {showTagline && (
         <span className="text-xs text-neutral-500 dark:text-neutral-400 leading-tight mt-1">
